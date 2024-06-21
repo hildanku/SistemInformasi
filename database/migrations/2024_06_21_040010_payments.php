@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('areas', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('areaName');
-            $table->string('areaFacilities');
+            $table->string('paymentDate');
+            $table->string('paymentMethod');
+            $table->string('paymentProof')->nullable();
+            $table->foreignId('rentId')->references('id')->on('rents');
+            $table->enum('status', ['paid', 'unpaid']);
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('areas');
+        //
     }
 };
