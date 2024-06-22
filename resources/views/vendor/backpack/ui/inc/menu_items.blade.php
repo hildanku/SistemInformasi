@@ -5,3 +5,4 @@
 <x-backpack::menu-item title="Areas" icon="la la-question" :link="backpack_url('area')" />
 <x-backpack::menu-item title="Costs" icon="la la-question" :link="backpack_url('cost')" />
 <x-backpack::menu-item title="Stalls" icon="la la-question" :link="backpack_url('stall')" />
+<x-backpack::menu-item title="Rents" icon="la la-question" :link="backpack_url('rent')" />
