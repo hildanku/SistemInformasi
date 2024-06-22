@@ -6,3 +6,4 @@
 <x-backpack::menu-item title="Costs" icon="la la-question" :link="backpack_url('cost')" />
 <x-backpack::menu-item title="Stalls" icon="la la-question" :link="backpack_url('stall')" />
 <x-backpack::menu-item title="Rents" icon="la la-question" :link="backpack_url('rent')" />
+<x-backpack::menu-item title="Payments" icon="la la-question" :link="backpack_url('payment')" />
