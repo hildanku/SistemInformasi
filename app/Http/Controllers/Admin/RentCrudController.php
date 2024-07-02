@@ -61,7 +61,12 @@ class RentCrudController extends CrudController
         /**
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');
-         */
+         */CRUD::field([
+                'name'  => 'status',
+                'label' => 'status',
+                'type'  => 'enum',
+                'options' => ['active' => 'active', 'inactive' => 'inactive'],
+            ]);
     }
 
     /**

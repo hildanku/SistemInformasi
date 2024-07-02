@@ -17,4 +17,9 @@ class Stall extends Model
         'status',
         'areaId',
     ];
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'areaId');
+    }
 }

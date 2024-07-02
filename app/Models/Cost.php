@@ -15,4 +15,8 @@ class Cost extends Model
         'rentalCost',
         'areaId',
     ];
+    public function area()
+    {
+        return $this->belongsTo(Area::class, 'areaId');
+    }
 }

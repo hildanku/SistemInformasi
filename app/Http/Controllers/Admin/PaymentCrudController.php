@@ -57,7 +57,17 @@ class PaymentCrudController extends CrudController
     {
         CRUD::setValidation(PaymentRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
-
+        CRUD::field([
+            'label'     => "Area",
+            'type'      => 'select',
+            'name'      => 'areaId', // the db column for the foreign key
+            'entity'    => 'area', // the method that defines the relationship in your Model
+            'model'     => "App\Models\Rent", // related model
+            'attribute' => 'areaName', // foreign key attribute that is shown to user
+            'options'   => (function ($query) {
+                return $query->orderBy('areaName', 'ASC')->get();
+            }), 
+        ]);
         /**
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\StallRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-
+use App\Models\Area;
 /**
  * Class StallCrudController
  * @package App\Http\Controllers\Admin
@@ -29,6 +29,10 @@ class StallCrudController extends CrudController
         CRUD::setModel(\App\Models\Stall::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/stall');
         CRUD::setEntityNameStrings('stall', 'stalls');
+        CRUD::column('areaId')->type('select')->label('Area')
+        ->entity('area')
+        ->model('App\Models\Area')
+        ->attribute('areaName');
     }
 
     /**
@@ -57,7 +61,17 @@ class StallCrudController extends CrudController
     {
         CRUD::setValidation(StallRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
-
+        CRUD::field([
+            'label'     => "Area",
+            'type'      => 'select',
+            'name'      => 'areaId', // the db column for the foreign key
+            'entity'    => 'area', // the method that defines the relationship in your Model
+            'model'     => "App\Models\Area", // related model
+            'attribute' => 'areaName', // foreign key attribute that is shown to user
+            'options'   => (function ($query) {
+                return $query->orderBy('areaName', 'ASC')->get();
+            }), 
+        ]);
         /**
          * Fields can be defined using the fluent syntax:
          * - CRUD::field('price')->type('number');

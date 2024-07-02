@@ -55,10 +55,7 @@ class AreaCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation([
-            'areaName' => 'required',
-            'areaFacilities' => 'required',
-        ]);
+        CRUD::setValidation(AreaRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
 
         /**
