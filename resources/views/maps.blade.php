@@ -22,21 +22,37 @@
       });
       map.addControl(new maplibregl.NavigationControl(), "top-left");
       const coordinates = [
-    [109.651284, -7.669550],
-    [109.650978, -7.669111],
-    [109.651028, -7.668332],
-    [109.651436, -7.667990],
-    [109.652313, -7.667945],
-    [109.652619, -7.668279],
-    [109.652631, -7.668887],
-    [109.652264, -7.669489],
-  ];
+        [109.651284, -7.669550],
+        [109.650978, -7.669111],
+        [109.651028, -7.668332],
+        [109.651436, -7.667990],
+        [109.652313, -7.667945],
+        [109.652619, -7.668279],
+        [109.652631, -7.668887],
+        [109.652264, -7.669489],
+      ];
 
   coordinates.forEach(coord => {
     new maplibregl.Marker()
       .setLngLat(coord)
       .addTo(map);
   });
-  
+  const labels = [
+    "available",
+    "unavailable",
+    "available",
+    // sisanya tanpa label
+  ];
+
+  coordinates.forEach((coord, index) => {
+    const marker = new maplibregl.Marker()
+      .setLngLat(coord)
+      .addTo(map);
+
+    if (labels[index]) {
+      const popup = new maplibregl.Popup({ offset: 25 }).setText(labels[index]);
+      marker.setPopup(popup);
+    }
+  });
     </script>
 @endsection
