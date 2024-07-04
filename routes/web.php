@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\LocationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,5 +30,6 @@ Route::middleware('auth')->group(function () {
 
 Route::view('/maps', 'maps');
 Route::view('/homepage', 'homepage');
+Route::get('/api/locations', [LocationController::class, 'getAllLocation']);
 
 require __DIR__.'/auth.php';
