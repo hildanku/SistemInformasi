@@ -21,38 +21,32 @@
         zoom: 17,
       });
       map.addControl(new maplibregl.NavigationControl(), "top-left");
-      const coordinates = [
-        [109.651284, -7.669550],
-        [109.650978, -7.669111],
-        [109.651028, -7.668332],
-        [109.651436, -7.667990],
-        [109.652313, -7.667945],
-        [109.652619, -7.668279],
-        [109.652631, -7.668887],
-        [109.652264, -7.669489],
-      ];
+      // const coordinates = [
+      //   [109.651284, -7.669550],
+      //   [109.650978, -7.669111],
+      //   [109.651028, -7.668332],
+      //   [109.651436, -7.667990],
+      //   [109.652313, -7.667945],
+      //   [109.652619, -7.668279],
+      //   [109.652631, -7.668887],
+      //   [109.652264, -7.669489],
+      // ];
 
-  coordinates.forEach(coord => {
-    new maplibregl.Marker()
-      .setLngLat(coord)
-      .addTo(map);
-  });
-  const labels = [
-    "available",
-    "unavailable",
-    "available",
-    // sisanya tanpa label
-  ];
+    fetch('/api/locations')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(location => {
+        const marker = new maplibregl.Marker()
+          .setLngLat([location.long, location.lat])
+          .addTo(map);
 
-  coordinates.forEach((coord, index) => {
-    const marker = new maplibregl.Marker()
-      .setLngLat(coord)
-      .addTo(map);
-
-    if (labels[index]) {
-      const popup = new maplibregl.Popup({ offset: 25 }).setText(labels[index]);
-      marker.setPopup(popup);
-    }
-  });
+        const popup = new maplibregl.Popup({ offset: 25 })
+          .setHTML(`<h3>${location.locationCode}</h3><p>${location.status}</p>`);
+        
+        marker.setPopup(popup);
+      });
+    })
+    .catch(error => console.error('Error fetching locations:', error));
+</script>
     </script>
 @endsection
