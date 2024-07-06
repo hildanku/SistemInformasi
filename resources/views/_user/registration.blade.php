@@ -1,13 +1,12 @@
 @extends('_voler.master')
 
 @section('content')
-
+<link href="https://unpkg.com/maplibre-gl@3.x/dist/maplibre-gl.css" rel="stylesheet" />
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Registration Application</h4>
             </div>
-            
             <div class="card-body">
                 <div class="alert alert-danger">please complete the form below</div>
                 <div class="row">
